@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { useClaim } from "hooks/useClaim";
 import Deposit from "components/Modals/Deposit";
 import Withdraw from "components/Modals/Withdraw";
-import "./farm.css"
+import "./farm.css";
 
 interface CardValueProps {
   poolName: string;
@@ -145,7 +145,9 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
           />
           <div>
             {/* <h5>{pool.name}</h5> */}
-            <h6 className="earnCoin">Earn <span>{pool.stakeTokenSymbol}</span></h6>
+            <h6 className="earnCoin">
+              Earn <span>{pool.stakeTokenSymbol}</span>
+            </h6>
             {/* <h5>
               {pool.depositFee && pool.depositFee.toString() === "0" ? (
                 <span>No Fees</span>
@@ -154,7 +156,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
           </div>
         </div>
         <div className="right">
-        {pool.depositFee ? (
+          {pool.depositFee ? (
             <div>
               Fees <b>{getBalanceNumber(pool.depositFee, 2)}%</b>
             </div>
@@ -167,7 +169,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
           <div className="">
             Length <b>3M</b>
           </div>
-          
+
           {withdrawLocked ? (
             <div>
               Withdraw Available At <b>{withdrawTimestamp.toDateString()}</b>
@@ -178,10 +180,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
       </header>
 
       <div className="totalStaked">
-        Total Staked{" "}
-        <b>
-          {totalStaked}
-        </b>
+        Total Staked <b>{totalStaked}</b>
       </div>
 
       <div className="content">

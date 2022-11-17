@@ -1,4 +1,4 @@
-@import url('http://fonts.cdnfonts.com/css/minako');
+@import url("http://fonts.cdnfonts.com/css/minako");
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -7,7 +7,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -36,135 +36,125 @@ body {
   opacity: 0.5;
 }
 
-
 code {
-  font-family: 'Kanit', sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
-.middlesec{
-  min-height:calc(100vh - 290px);
+.middlesec {
+  min-height: calc(100vh - 290px);
 }
 
-*{
-  scrollbar-color: #F2F2F2 transparent;
+* {
+  scrollbar-color: #f2f2f2 transparent;
   scrollbar-width: thin;
 }
 
-::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: none;
-	background-color: transparent;
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: none;
+  background-color: transparent;
 }
 
-::-webkit-scrollbar
-{
-	width: 3px;
-	background-color: transparent;
+::-webkit-scrollbar {
+  width: 3px;
+  background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb
-{
-	background-color: #F2F2F2;
+::-webkit-scrollbar-thumb {
+  background-color: #f2f2f2;
 }
 
-button{
+button {
   outline: none !important;
   border: 0;
   border-radius: 8px;
-  background-color:rgb(224, 14, 139);
-  color:#fff;
+  background-color: rgb(224, 14, 139);
+  color: #fff;
   transition: background-color 0.2s ease 0s, opacity 0.2s ease 0s;
   font-weight: 600;
   padding: 7px 30px;
   font-size: 18px;
 }
 
-
-
-
-
-.mycard{
+.mycard {
   // max-width: calc(33.33% - 8px);
   // height: 410px;
   // min-width: 280px;
   margin: 0 4px 8px;
   width: 100%;
 }
-.container{
+.container {
   max-width: unset;
   padding: 0 7%;
 }
 
 .ReactModal__Overlay {
-  background:rgba(241,173,43,0.4) !important;
+  background: rgba(241, 173, 43, 0.4) !important;
   z-index: 99;
-  .claimmodelouter{
+  .claimmodelouter {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    .buttonOuter{
+    .buttonOuter {
       position: relative;
-      button{
+      button {
         position: absolute;
-        right:4px;
+        right: 4px;
         top: 4px;
         margin: 0;
-        font-size:12px !important;
+        font-size: 12px !important;
         padding: 3px 15px;
         border-radius: 12px;
       }
     }
-    .fa-times{
+    .fa-times {
       position: absolute;
       right: 0px;
       top: 0px;
       cursor: pointer;
     }
-    h4{
+    h4 {
       font-size: 16px;
       margin-bottom: 8x;
       font-weight: 600;
     }
-    h5{
+    h5 {
       font-size: 14px;
       margin-bottom: 10px;
       font-weight: 600;
       color: #777e90;
     }
-    input{
+    input {
       border: 2px solid #d2d2d2;
       border-radius: 15px;
       padding: 6px 20px;
       margin-bottom: 10px;
       font-size: 14px;
       outline: 0;
-      &:focus{
+      &:focus {
         box-shadow: none;
       }
     }
-    button{
-      font-size: 13px  !important;
+    button {
+      font-size: 13px !important;
     }
   }
 }
 
-
-
-.twittermodal{
-  .logo{
-    height:30px;
+.twittermodal {
+  .logo {
+    height: 30px;
     width: auto;
   }
-  .fa-times{
+  .fa-times {
     color: #f1ad2c;
   }
-  h4{
+  h4 {
     text-align: center;
     margin-top: 20px;
     color: #23262f;
   }
-  .twitterfeedinner{
+  .twitterfeedinner {
     margin-top: 20px;
     overflow-y: scroll;
     max-height: 60vh;
@@ -174,145 +164,146 @@ button{
 .ReactModal__Content {
   overflow: visible !important;
 }
-.securitymodal{
+.securitymodal {
   align-items: flex-start !important;
-  .logo{
-    height:70px;
+  .logo {
+    height: 70px;
     width: auto;
     position: absolute;
     left: 50%;
-    transform: translate(-50%,-80%);
+    transform: translate(-50%, -80%);
   }
-  .fa-times{
+  .fa-times {
     color: #f1ad2c;
   }
-  h4{
+  h4 {
     text-align: left;
     margin-top: 40px;
     color: #23262f;
   }
-  .border{
-    padding:8px 16px;
+  .border {
+    padding: 8px 16px;
     border-radius: 12px;
     background-color: #f1ad2b;
     font-size: 14px;
     color: #23262f;
-    border:2px solid #f1ad2b;
-    font-weight:600;
-    text-decoration:none;
-    text-align:center;
+    border: 2px solid #f1ad2b;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
     background-color: transparent;
-    border:2px solid #d2d2d2;
-    img{
+    border: 2px solid #d2d2d2;
+    img {
       margin-right: 6px;
       margin-top: -2px;
     }
   }
-  .securityfeedinner{
+  .securityfeedinner {
     max-height: 500px;
     overflow-y: scroll;
     width: 100%;
-    h4{
+    h4 {
       margin-bottom: 20px;
     }
-    
-    .mrow{
+
+    .mrow {
       display: flex;
       align-items: center;
       color: #23262f;
       font-weight: bold;
       margin: 8px 0;
-      
-      .name{
+
+      .name {
         min-width: 120px;
         text-align: right;
         margin-right: 14px;
       }
-      .address{
+      .address {
         margin-right: 14px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 200px;
       }
-      button{
+      button {
         margin-right: 14px;
         background-color: #1da3ff;
         border: 2px solid #1da3ff;
         color: #fff;
-        i{
+        i {
           margin-right: 5px;
         }
       }
-      img{
-        &.isnotpool{
-            width:34px;
-            height:34px;
-            border-radius:50%;
-            border:2px solid #fff;
-            box-shadow: 0 0 0 2px #d2d2d2;
-            margin-right:10px;
-            margin-left: 5px;
+      img {
+        &.isnotpool {
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          border: 2px solid #fff;
+          box-shadow: 0 0 0 2px #d2d2d2;
+          margin-right: 10px;
+          margin-left: 5px;
         }
-        &.ispool{
-            width:80px;
-            height:80px;
-            margin:0 -14px 0 -16px;
+        &.ispool {
+          width: 80px;
+          height: 80px;
+          margin: 0 -14px 0 -16px;
         }
       }
-      
     }
   }
 
-
-  .teamtoken{
+  .teamtoken {
     margin-top: 20px;
     margin-left: 40px;
     font-weight: 500;
     width: 100%;
-    b{
+    b {
       margin-right: 20px;
     }
-    button{
+    button {
       margin: 0 14px;
       background-color: #1da3ff;
       border: 2px solid #1da3ff;
       color: #fff;
-      i{
+      i {
         margin-right: 5px;
       }
     }
   }
 
   @media screen and (max-width: 768px) {
-    .mrow{
+    .mrow {
       flex-direction: column;
       width: 100%;
     }
-    .name, .address, button, .border{
+    .name,
+    .address,
+    button,
+    .border {
       margin: 5px 0 !important;
     }
-    .name{
+    .name {
       text-align: center !important;
     }
 
-    .teamtoken{
+    .teamtoken {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       margin-left: 0;
-      b{
+      b {
         margin: 0;
       }
-      button{
+      button {
         margin: 5px 0;
       }
     }
   }
 
-  .footerlogo{
+  .footerlogo {
     display: block;
     margin: auto;
     margin-top: 20px;

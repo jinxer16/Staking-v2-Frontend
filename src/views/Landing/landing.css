@@ -1,6 +1,6 @@
-.topCards{
-    display: flex;
-    gap: 3rem;
-    margin-bottom: 5rem !important;
-    justify-content: center;
+.topCards {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 5rem !important;
+  justify-content: center;
 }

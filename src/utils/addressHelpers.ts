@@ -1,7 +1,6 @@
-import Contracts from "config/contracts"
-import { DEFAULT_CHAIN_ID } from "config"
+import Contracts from "config/contracts";
+import { DEFAULT_CHAIN_ID } from "config";
 
 export const getMulticallAddress = () => {
-    return Contracts.multicall[DEFAULT_CHAIN_ID]
-}
-
+  return Contracts.multicall[DEFAULT_CHAIN_ID];
+};

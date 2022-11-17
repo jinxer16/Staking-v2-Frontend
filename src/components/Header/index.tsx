@@ -1,5 +1,10 @@
 import { useWeb3React } from "@web3-react/core";
-import { DEFAULT_CHAIN_ID, NATIVE_TOKEN_ADDRESS, NATIVE_TOKEN_SYMBOL, ORIO_LOGO_URL } from "config";
+import {
+  DEFAULT_CHAIN_ID,
+  NATIVE_TOKEN_ADDRESS,
+  NATIVE_TOKEN_SYMBOL,
+  ORIO_LOGO_URL,
+} from "config";
 import React from "react";
 import {
   useORIOTotalValue,
@@ -10,11 +15,11 @@ import {
 import styled from "styled-components";
 import { getBalanceNumber } from "utils/formatBalance";
 import { registerToken } from "utils/wallet";
-import './header.css'
+import "./header.css";
 
 const Header: React.FC = () => {
   const pool = usePoolFromName(NATIVE_TOKEN_SYMBOL);
-  const { account } = useWeb3React()
+  const { account } = useWeb3React();
   const nativePrice = useTokenPrice(
     NATIVE_TOKEN_SYMBOL,
     false,
@@ -39,8 +44,13 @@ const Header: React.FC = () => {
     : `-`;
 
   const addTokenToMetamask = async () => {
-      await registerToken(NATIVE_TOKEN_ADDRESS, NATIVE_TOKEN_SYMBOL, 18, ORIO_LOGO_URL)
-  }
+    await registerToken(
+      NATIVE_TOKEN_ADDRESS,
+      NATIVE_TOKEN_SYMBOL,
+      18,
+      ORIO_LOGO_URL
+    );
+  };
   return (
     <div
       className="wow fadeInDown"
@@ -52,7 +62,7 @@ const Header: React.FC = () => {
           {/* <h3>36,641.20 <span>+10.25%</span></h3> */}
           <div className="leftSection">
             <h6>
-              <img src="images/tokenicon.png" alt="" className="borioicon"/>
+              <img src="images/tokenicon.png" alt="" className="borioicon" />
             </h6>
             <div className="btnOuter">
               <a
@@ -76,8 +86,8 @@ const Header: React.FC = () => {
                 Add ORIO to Metamask
                 </span>
               </a> */}
+            </div>
           </div>
-        </div>
         </div>
         <div className="infos">
           <div className="info_single">
@@ -90,9 +100,12 @@ const Header: React.FC = () => {
           </div>
           <div>
             <h6>Boorio Price</h6>
-              <b>${nativePrice.toLocaleString(undefined, {
+            <b>
+              $
+              {nativePrice.toLocaleString(undefined, {
                 maximumFractionDigits: 7,
-              })}</b>
+              })}
+            </b>
           </div>
         </div>
       </div>

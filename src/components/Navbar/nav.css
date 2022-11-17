@@ -10,13 +10,13 @@
   gap: 2rem;
 }
 
-.navbar .rightSection{
+.navbar .rightSection {
   display: flex;
   gap: 1rem;
 }
 
 .navbar .rightSection .launch {
-  background: linear-gradient(90deg, #FF007B 0%, #7D009A 100%);
+  background: linear-gradient(90deg, #ff007b 0%, #7d009a 100%);
   color: white;
   border: none;
   cursor: pointer;
@@ -45,7 +45,8 @@
 }
 
 @media screen and (max-width: 1150px) {
-  .navbar .middlePart, .navbar .rightSection {
+  .navbar .middlePart,
+  .navbar .rightSection {
     display: none;
   }
   .navbar .hamburger {
@@ -57,7 +58,7 @@
     inset: 0;
     background: rgba(0, 0, 0, 0.8);
     -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
   .navMenuContainer .crossIcon {
     float: right;
@@ -82,7 +83,7 @@
     cursor: pointer;
   }
   .navMenuContainer .navBarMenu .notActive {
-    background: linear-gradient(90deg, #FF007B 0%, #7D009A 100%);
+    background: linear-gradient(90deg, #ff007b 0%, #7d009a 100%);
     border-radius: 50%;
   }
   .navMenuContainer .navBarMenu button {
@@ -92,7 +93,7 @@
   .navMenuContainerVisible {
     display: block;
     -webkit-animation: menuOpen 0.6s forwards;
-            animation: menuOpen 0.6s forwards;
+    animation: menuOpen 0.6s forwards;
   }
   @-webkit-keyframes menuOpen {
     0% {

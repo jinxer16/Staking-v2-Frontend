@@ -1,63 +1,63 @@
-.headercontainer{
-    display: flex;
-    gap: 2rem;
-    background: #D9D9D9;
-    color: #000;
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    grid-gap: 2rem;
-    justify-content: space-between;
+.headercontainer {
+  display: flex;
+  gap: 2rem;
+  background: #d9d9d9;
+  color: #000;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  grid-gap: 2rem;
+  justify-content: space-between;
 }
 
-.headercontainer img{
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
+.headercontainer img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
 }
 
-.leftSection{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 }
 
-.btnOuter{
-    display: flex;
-    flex-direction: column;   
+.btnOuter {
+  display: flex;
+  flex-direction: column;
 }
 
-.btnOuter a button{
-    cursor: pointer;
-    color: white;
-    background: linear-gradient(90deg, #FF007B -0.07%, #7D009A 100%);
-    font-size: .8rem;
+.btnOuter a button {
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(90deg, #ff007b -0.07%, #7d009a 100%);
+  font-size: 0.8rem;
 }
 
-.btnOuter a .orioSmartChain{
-    background: white;
-    color: black;
-    margin-top: .5rem;
+.btnOuter a .orioSmartChain {
+  background: white;
+  color: black;
+  margin-top: 0.5rem;
 }
 
-.infos{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.infos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.infos div h6{
-    font-size: 1rem;
-    font-weight: 400;
+.infos div h6 {
+  font-size: 1rem;
+  font-weight: 400;
 }
 
-.infos div b{
-    font-size: 1.6rem;
-    margin-top: -0.5rem;
+.infos div b {
+  font-size: 1.6rem;
+  margin-top: -0.5rem;
 }
 
-.infos div{
-    display: flex;
-    flex-direction: column;
-    text-align: right;
+.infos div {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
 }

@@ -1,69 +1,69 @@
-.approvalCard{
-    background: white;
-    color: black;
-    padding: 1rem;
-    border-radius: .5rem;
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-    gap: 2rem;
+.approvalCard {
+  background: white;
+  color: black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  gap: 2rem;
 }
 
-div.headerinfo{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+div.headerinfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.isnotpool{
-    width: 3rem;
-    height: 3rem;
-    object-fit: contain;
+.isnotpool {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
 }
 
-.earnCoin span{
-    font-size: 1.7rem;
-    font-weight: 600;
-    margin-left: .2rem
+.earnCoin span {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-left: 0.2rem;
 }
 
-.right{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1.5rem;
+.right {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
 }
 
-.right div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.right div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.right div b{
-    font-size: 1.5rem;
+.right div b {
+  font-size: 1.5rem;
 }
 
-header hr{
-    height: .5px;
-    border-radius: 10px;
-    background: black;
+header hr {
+  height: 0.5px;
+  border-radius: 10px;
+  background: black;
 }
 
-.totalStaked{
-    font-size: 1.1rem;
-    text-align: center;
-    margin-top: -1.5rem;
-    display: flex;
-    flex-direction: column;
+.totalStaked {
+  font-size: 1.1rem;
+  text-align: center;
+  margin-top: -1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.totalStaked b{
-    font-size: 1.6rem;
+.totalStaked b {
+  font-size: 1.6rem;
 }
 
-.content .approve button{
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 75%;
+.content .approve button {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%;
 }

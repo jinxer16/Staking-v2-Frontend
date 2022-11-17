@@ -1,0 +1,32 @@
+name: Install and Build
+
+on:
+  pull_request:
+  push:
+  create:
+    tag:
+      - "v*"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+      - name: Install
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Check Prettier
+        run: yarn prettier:check

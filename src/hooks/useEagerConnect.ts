@@ -1,42 +1,41 @@
-import { useEffect } from 'react'
-import useAuth from 'hooks/useAuth'
-import { localStorageKey } from 'config'
-import { ConnectorNames } from 'config/types'
-
-
+import { useEffect } from "react";
+import useAuth from "hooks/useAuth";
+import { localStorageKey } from "config";
+import { ConnectorNames } from "config/types";
 
 const _activeChainListener = async () =>
   new Promise<void>((resolve) =>
-    Object.defineProperty(window, 'ActiveChain', {
+    Object.defineProperty(window, "ActiveChain", {
       get() {
-        return this.network
+        return this.network;
       },
       set(network) {
-        this.network = network
+        this.network = network;
 
-        resolve()
+        resolve();
       },
-    }),
-  )
+    })
+  );
 
 const useEagerConnect = (chainId: number) => {
-  const { login } = useAuth()
+  const { login } = useAuth();
 
   useEffect(() => {
-    const connectorId = window.localStorage.getItem(localStorageKey) as ConnectorNames
+    const connectorId = window.localStorage.getItem(
+      localStorageKey
+    ) as ConnectorNames;
     if (connectorId) {
-      const isConnectorInjected = connectorId === ConnectorNames.Injected
-      const activeChainDefined = Reflect.has(window, 'ActiveChain')
+      const isConnectorInjected = connectorId === ConnectorNames.Injected;
+      const activeChainDefined = Reflect.has(window, "ActiveChain");
 
       if (isConnectorInjected && !activeChainDefined) {
-        _activeChainListener().then(() => login(connectorId, chainId))
-        return
+        _activeChainListener().then(() => login(connectorId, chainId));
+        return;
       }
 
-      login(ConnectorNames.Injected, chainId)
+      login(ConnectorNames.Injected, chainId);
     }
-  }, [login, chainId])
-}
+  }, [login, chainId]);
+};
 
-export default useEagerConnect
-
+export default useEagerConnect;
