@@ -4,6 +4,8 @@ import Header from '../../components/Header'
 import FibHeader from '../../components/FibHeader'
 import FarmCard from '../../components/Cards/Farm'
 import { usePools } from 'state/hooks'
+import './landing.css'
+
 const HomeDiv = styled.div`
 .col-lg-4{
   padding:0 4px;
@@ -46,8 +48,13 @@ const Landing: React.FC = () => {
   const pools = usePools()
   return (
     <HomeDiv >
-      <Header/>
-      <FibHeader/>
+      <div className="topCards row w-100">
+        <Header/>
+        <Header/>
+        <Header/>
+      </div>
+
+      {/* <FibHeader/> */}
       <div className="cardsouter">
           <div className="row w-100">
             {

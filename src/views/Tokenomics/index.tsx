@@ -140,8 +140,6 @@ const Tokenomics:  React.FC = ()=> {
                         />
                 </div>
             </div>
-
-          
         </div>
     </Div>
   )

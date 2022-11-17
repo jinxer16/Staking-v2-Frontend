@@ -18,6 +18,7 @@ import { useWeb3React } from '@web3-react/core';
 import { useDispatch } from 'react-redux';
 import useRefresh from 'hooks/useRefresh';
 import { fetchPoolsUserDataAsync } from 'state/pools';
+import background from "./assets/bg.webp"
 
 
 
@@ -38,6 +39,10 @@ function App() {
       <Router>
         <Navbar/>
         {/* <Twitter/> */}
+
+        <div className="background">
+          <img src={background} alt="bg" />
+        </div>
        
         <div className="middlesec">
           <Switch>

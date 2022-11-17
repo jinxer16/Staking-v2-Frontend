@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { useClaim } from "hooks/useClaim";
 import Deposit from "components/Modals/Deposit";
 import Withdraw from "components/Modals/Withdraw";
+import "./farm.css"
 
 interface CardValueProps {
   poolName: string;
@@ -130,7 +131,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
     : false;
 
   return (
-    <CardDiv className="mycard farmpoolcard">
+    <div className="approvalCard">
       {/* @ts-ignore */}
       <Deposit name={pool.name} ref={depositRef} />
       {/* @ts-ignore */}
@@ -143,43 +144,46 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
             alt=""
           />
           <div>
-            <h5>{pool.name}</h5>
-            <h6>Earn {pool.stakeTokenSymbol}</h6>
-            <h5>
+            {/* <h5>{pool.name}</h5> */}
+            <h6 className="earnCoin">Earn <span>{pool.stakeTokenSymbol}</span></h6>
+            {/* <h5>
               {pool.depositFee && pool.depositFee.toString() === "0" ? (
                 <span>No Fees</span>
               ) : null}
-            </h5>
+            </h5> */}
           </div>
         </div>
         <div className="right">
+        {pool.depositFee ? (
+            <div>
+              Fees <b>{getBalanceNumber(pool.depositFee, 2)}%</b>
+            </div>
+          ) : null}
+
           <div>
             APY <b>{rewardRateInNum > 0 ? aprInNumFormatted : "NaN"} %</b>
           </div>
-          <div>
-            Total Staked{" "}
-            <b>
-              {totalStaked} {pool.stakeTokenSymbol}
-            </b>
+
+          <div className="">
+            Length <b>3M</b>
           </div>
-          {pool.depositFee ? (
-            <div
-              style={
-                pool.depositFee.toString() === "0"
-                  ? { opacity: 0.5 }
-                  : { opacity: 1 }
-              }
-            >
-              Deposit Fee <b>{getBalanceNumber(pool.depositFee, 2)}%</b>
-            </div>
-          ) : null}
+          
           {withdrawLocked ? (
             <div>
               Withdraw Available At <b>{withdrawTimestamp.toDateString()}</b>
             </div>
           ) : null}
         </div>
+        <hr />
       </header>
+
+      <div className="totalStaked">
+        Total Staked{" "}
+        <b>
+          {totalStaked}
+        </b>
+      </div>
+
       <div className="content">
         {isApproved ? (
           <div className="contentfetched">
@@ -234,7 +238,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
         )}
       </div>
       <footer>
-        <div className="copybutton">
+        {/* <div className="copybutton">
           <a
             href={`${BASE_EXPLORER_URL}/address/${pool.address[DEFAULT_CHAIN_ID]}`}
             target="_blank"
@@ -252,352 +256,10 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
               navigator.clipboard.writeText(textAreaRef.current.value);
             }}
           ></i>
-        </div>
+        </div> */}
       </footer>
-    </CardDiv>
+    </div>
   );
 };
-const CardDiv = styled.div`
-  // width:40%;
-  background: #131723;
-  color: #fff;
-  border-radius: 14px;
-  overflow: hidden;
-  &.farmpoolcard {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  &.specialpool {
-    border: 2px solid #cbcaf9;
-    .plusminus {
-      color: #23262f !important;
-    }
-    .headerinfo {
-      h5 {
-        span {
-          background-color: #6b67ef !important;
-          color: #fff;
-        }
-      }
-    }
-    .content {
-      button {
-        background-color: #6b67ef;
-        border: 2px solid #6b67ef;
-        color: #fff;
-      }
-    }
-    .copybutton {
-      input,
-      i {
-        color: #6b67ef;
-      }
-    }
-  }
-  header {
-    display: flex;
-    justify-content: space-between;
-    // align-items:center;
-    padding: 18px 16px;
-    color: #fff;
-    position: relative;
-    border-bottom: 2px solid rgb(56, 50, 65);
-    // align-items: center;
-    min-height: 122px;
-    .headerinfo {
-      display: flex;
-      // align-items:center;
-      img {
-        &.isnotpool {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          border: 3px solid #d2d2d2;
-          margin-right: 10px;
-        }
-        &.ispool {
-          width: 80px;
-          height: 80px;
-          margin: 0 -10px 0 -20px;
-        }
-      }
-      .poolimg {
-        display: flex;
-        flex-direction: column;
-        img {
-          height: 44px;
-          width: auto;
-          border-radius: 50%;
-          border: 2px solid rgb(56, 50, 65);
-          box-shadow: 0 0 0 2px #d2d2d2;
-          margin-right: 10px;
-          &:last-child {
-            margin-top: -5px;
-          }
-        }
-      }
-      h5 {
-        color: #fff;
-        font-size: 16px;
-        font-weight: 600;
-        margin: 0;
-        margin-top: 4px;
-        margin-bottom: 6px;
-        display: flex;
-        span {
-          border-radius: 8px;
-          background-color: #f1ad2b;
-          font-size: 10px;
-          // font-weight:bold;
-          padding: 4px 8px;
-          margin-top: 3px;
-        }
-      }
-      h6 {
-        color: rgb(184, 173, 210);
-        font-size: 14px;
-        font-weight: 600;
-        margin: 0;
-      }
-      a {
-        color: #f1ad2c;
-        font-weight: bold;
-        font-size: 12px;
-        margin-top: 10px;
-        display: block;
-      }
-    }
-    .right {
-      text-align: right;
-      // height:160px;
-      div {
-        display: flex;
-        justify-content: space-between;
-        font-weight: 600;
-        margin: 3px 0;
-        font-size: 14px;
-      }
-      b {
-        color: rgb(184, 173, 210);
-        margin-left: 14px;
-        font-weight: 700;
-      }
-    }
-    @media screen and (max-width: 1250px) {
-      flex-direction: column;
-      .headerinfo {
-        position: relative;
-        a {
-          position: absolute;
-          right: 0px;
-          top: 50%;
-          transform: translateY(-50%);
-          margin: 0;
-        }
-        .poolimg {
-          flex-direction: row;
-          img {
-            &:last-child {
-              margin-top: 0;
-              margin-left: -16px;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 18px 16px;
-    color: #777e90;
-    position: relative;
-    border-top: 2px solid rgb(56, 50, 65);
-    text-align: center;
-    font-weight: 600;
-    font-size: 16px;
-    position: relative;
-    .pairbuttonouter {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      a {
-        overflow: hidden;
-        display: block;
-        color: #fff;
-        font-size: 14px;
-        min-width: unset;
-        padding: 7px 10px;
-        text-decoration: none;
-        border: 2px solid rgb(56, 50, 65);
-        background: transparent;
-        border-radius: 10px;
-        .lg {
-          height: 14px;
-          width: auto;
-          margin-right: 4px;
-        }
-        .bg {
-          position: absolute;
-          right: 0;
-          top: 0;
-          z-index: -1;
-          border-top-right-radius: 10px;
-        }
-      }
-    }
-    @media screen and (max-width: 1350px) {
-      .pairbuttonouter {
-        position: Relative;
-        left: 0px;
-        top: 0%;
-        transform: translateY(0%);
-        margin: 0 0 10px;
-      }
-    }
-    .copybutton {
-      display: flex;
-      align-items: center;
-      input {
-        border: 0;
-        outline: 0;
-        padding: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 140px;
-        background: transparent;
-        color: rgb(224, 14, 139);
-        font-weight: bold;
-        font-size: 15px;
-        cursor: pointer;
-      }
-      i {
-        margin-left: 8px;
-        color: rgb(224, 14, 139);
-        cursor: pointer;
-      }
-    }
-    a {
-      color: rgb(224, 14, 139);
-      font-weight: bold;
-      font-size: 15px;
-      margin-top: 0px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
-  }
-
-  .content {
-    padding: 16px 30px;
-    height: 30vh;
-    display: flex;
-    align-items: center;
-    min-height: 200px;
-    max-height: 300px !important;
-    button {
-      font-size: 14px;
-    }
-    .approve {
-      width: 100%;
-
-      button {
-        margin: auto;
-        display: block;
-        padding: 8px 40px;
-        color: #fff;
-      }
-    }
-    .contentfetched {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-direction: column;
-      width: 100%;
-      .infos {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        .info_single {
-          padding-right: 20px;
-          margin-right: 20px;
-          border-right: 2px solid rgb(56, 50, 65);
-          color: #777e90;
-          &:first-child {
-            width: calc(50% - 5px);
-          }
-          &:last-child {
-            padding-right: 0px;
-            margin-right: 0px;
-            border-right: 0;
-          }
-          b {
-            color: #fff;
-            font-size: 17px;
-            font-weight: 500;
-          }
-          h6 {
-            margin-bottom: 4px;
-          }
-          div {
-            font-weight: 600;
-          }
-        }
-      }
-
-      .plusminus {
-        background: transparent;
-        border: 2px solid #d2d2d2;
-        margin-left: 6px;
-
-        &:disabled {
-          border: 2px solid #d2d2d2;
-          color: #777e90;
-        }
-      }
-      .controls {
-        margin-top: 20px;
-        button {
-          &:first-child {
-            border: 3px solid rgb(224, 14, 139);
-          }
-          padding: 7px 16px;
-          font-size: 12px;
-          margin: 3px;
-        }
-        @media screen and (max-width: 400px) {
-          display: flex;
-          justify-content: center;
-          flex-flow: wrap;
-        }
-      }
-    }
-    @media screen and (max-width: 1500px) {
-      min-height: 164px;
-      padding: 16px 20px;
-      .contentfetched {
-        flex-direction: column;
-        .controls {
-          margin-top: 20px;
-        }
-      }
-    }
-    @media screen and (max-width: 500px) {
-      .info_single {
-        font-size: 13px;
-        h6 {
-          font-size: 13px;
-        }
-      }
-    }
-  }
-`;
 
 export default FarmCard;

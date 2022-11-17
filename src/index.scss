@@ -10,17 +10,32 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
 body {
-  margin: 0;
-  font-family: 'Kanit', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #000;
-  text-align:left;
-  background: rgba(0, 0, 0, 0) linear-gradient(135deg, rgb(23, 138, 245), rgb(84, 0, 140)) repeat scroll 0% 0%;
-  overflow-x: hidden !important;
-  min-height: 100vh;
+  background: #010101;
+  color: white;
+  font-family: rubik;
 }
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
+.background img {
+  height: 1000%;
+  width: 150%;
+  opacity: 0.5;
+}
+
 
 code {
   font-family: 'Kanit', sans-serif;
