@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from "react";
-import styled from "styled-components";
 import { usePoolFromName, usePoolUser, useTokenPrice } from "state/hooks";
-import { BASE_EXPLORER_URL, DEFAULT_CHAIN_ID, YEAR_DURATION } from "config";
+import { DEFAULT_CHAIN_ID, YEAR_DURATION } from "config";
 import BigNumber from "bignumber.js";
 import { getBalanceNumber } from "utils/formatBalance";
 import { useWeb3React } from "@web3-react/core";
@@ -41,7 +40,6 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
   const { onClaim } = useClaim(pool.address[DEFAULT_CHAIN_ID]);
   const depositRef = useRef(null);
   const withdrawRef = useRef(null);
-  const textAreaRef = useRef(null);
   const handleApprove = useCallback(async () => {
     try {
       setPendingApproveTx(true);

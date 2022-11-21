@@ -28,7 +28,7 @@ const customStyles = {
   },
 };
 
-const { forwardRef, useRef, useImperativeHandle } = React;
+const { forwardRef, useImperativeHandle } = React;
 
 interface DepositModalProps {
   name: string;

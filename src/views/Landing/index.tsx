@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../../components/Header";
-import FibHeader from "../../components/FibHeader";
 import FarmCard from "../../components/Cards/Farm";
 import { usePools } from "state/hooks";
 import "./landing.css";

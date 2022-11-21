@@ -6,7 +6,7 @@ export const useERC20 = (address: string) => {
   const provider = useWeb3Provider();
   return useMemo(
     () => getERC20Contract(address, provider.getSigner()),
-    [address, provider.getSigner()]
+    [address, provider]
   );
 };
 

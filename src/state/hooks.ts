@@ -11,15 +11,9 @@ import {
   getTokenMarketInfo,
   getTokenPrice,
 } from "utils/priceHelpers";
-import {
-  DEFAULT_CHAIN_ID,
-  FIBO_TOKEN_ADDRESS,
-  NATIVE_TOKEN_ADDRESS,
-} from "config";
+import { DEFAULT_CHAIN_ID, FIBO_TOKEN_ADDRESS } from "config";
 import { getBalanceNumber, getDecimalAmount } from "utils/formatBalance";
 import axios from "axios";
-
-const ZERO = new BigNumber(0);
 
 export const useFetchPublicData = () => {
   const dispatch = useDispatch();
@@ -37,7 +31,7 @@ export const usePools = (): PoolConfig[] => {
 
 export const usePoolFromName = (name: string): PoolConfig => {
   const pool = useSelector((state: State) =>
-    state.pools.data.find((f) => f.name == name)
+    state.pools.data.find((f) => f.name === name)
   );
   return pool!;
 };

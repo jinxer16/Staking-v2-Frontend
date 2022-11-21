@@ -12,14 +12,12 @@ import {
   useTokenMarketInfo,
   useTokenPrice,
 } from "state/hooks";
-import styled from "styled-components";
 import { getBalanceNumber } from "utils/formatBalance";
 import { registerToken } from "utils/wallet";
 import "./header.css";
 
 const Header: React.FC = () => {
   const pool = usePoolFromName(NATIVE_TOKEN_SYMBOL);
-  const { account } = useWeb3React();
   const nativePrice = useTokenPrice(
     NATIVE_TOKEN_SYMBOL,
     false,
@@ -43,14 +41,14 @@ const Header: React.FC = () => {
       })}`
     : `-`;
 
-  const addTokenToMetamask = async () => {
-    await registerToken(
-      NATIVE_TOKEN_ADDRESS,
-      NATIVE_TOKEN_SYMBOL,
-      18,
-      ORIO_LOGO_URL
-    );
-  };
+  // const addTokenToMetamask = async () => {
+  //   await registerToken(
+  //     NATIVE_TOKEN_ADDRESS,
+  //     NATIVE_TOKEN_SYMBOL,
+  //     18,
+  //     ORIO_LOGO_URL
+  //   );
+  // };
   return (
     <div
       className="wow fadeInDown"
@@ -68,12 +66,14 @@ const Header: React.FC = () => {
               <a
                 href="https://bsc.fibswap.io/swap?outputCurrency=0xa30BAba694b8Fc3524C46edC5af295F55381dc60"
                 target="_blank"
+                rel="noreferrer"
               >
                 <button>Buy ORIO</button>
               </a>
               <a
                 href="https://bscscan.com/address/0xa30BAba694b8Fc3524C46edC5af295F55381dc60"
                 target="_blank"
+                rel="noreferrer"
               >
                 <button className="orioSmartChain">Smart Contract</button>
               </a>

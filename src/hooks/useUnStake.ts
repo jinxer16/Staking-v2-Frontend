@@ -1,9 +1,7 @@
 import { useCallback } from "react";
-import { useWeb3React } from "@web3-react/core";
 import { useRewardPoolContract } from "./useContracts";
 
 export const useUnStake = (poolAddress: string) => {
-  const { account } = useWeb3React();
   const rewardPoolContract = useRewardPoolContract(poolAddress);
   const handleUnStake = useCallback(
     async (amount: string) => {
@@ -16,7 +14,7 @@ export const useUnStake = (poolAddress: string) => {
         return false;
       }
     },
-    [account, rewardPoolContract]
+    [rewardPoolContract]
   );
 
   return { onUnStake: handleUnStake };

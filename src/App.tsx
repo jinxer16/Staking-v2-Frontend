@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import useEagerConnect from "hooks/useEagerConnect";
-import logo from "./logo.svg";
 import Navbar from "./components/Navbar";
-import Twitter from "./components/Modals/Twitter";
 import Landing from "./views/Landing";
 import Roadmap from "./views/Roadmap";
 import Tokenomics from "./views/Tokenomics";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { DEFAULT_CHAIN_ID } from "config";
 import { useFetchPublicData } from "state/hooks";
 import { useWeb3React } from "@web3-react/core";
@@ -19,7 +17,7 @@ function App() {
   useEagerConnect(DEFAULT_CHAIN_ID);
   useFetchPublicData();
   const dispatch = useDispatch();
-  const { slowRefresh, fastRefresh } = useRefresh();
+  const { slowRefresh } = useRefresh();
 
   const { account } = useWeb3React();
   useEffect(() => {

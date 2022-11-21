@@ -1,4 +1,3 @@
-import BigNumber from "bignumber.js";
 import multicall from "utils/multicall";
 import erc20ABI from "config/abi/erc20.json";
 import { getBalanceNumber } from "./formatBalance";
