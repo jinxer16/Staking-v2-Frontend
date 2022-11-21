@@ -2,7 +2,7 @@ import { useWeb3React } from "@web3-react/core";
 import BigNumber from "bignumber.js";
 import { DEFAULT_CHAIN_ID } from "config";
 import { useUnStake } from "hooks/useUnStake";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -24,7 +24,7 @@ const customStyles = {
   },
 };
 
-const { forwardRef, useRef, useImperativeHandle } = React;
+const { forwardRef, useImperativeHandle } = React;
 
 interface WithdrawModalProps {
   name: string;
@@ -100,7 +100,7 @@ const Withdraw: React.FC<WithdrawModalProps> = forwardRef((props, ref) => {
                 const stakeStatus = await onUnStake(
                   tokenAmountInBigNum.toString(10)
                 );
-                if (stakeStatus == 1) {
+                if (stakeStatus === 1) {
                   toast.success("Withdraw successfully!");
                   setTokenAmount(0);
                   closeModal();

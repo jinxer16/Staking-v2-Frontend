@@ -44,7 +44,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
     try {
       setPendingApproveTx(true);
       const approveStatus = await onApprove();
-      if (approveStatus == 1) {
+      if (approveStatus === 1) {
         toast.success("Approved successfully!");
       }
       setPendingApproveTx(false);
@@ -52,13 +52,13 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
       console.error(e);
       toast.error("Approve failed!");
     }
-  }, [onApprove, account]);
+  }, [onApprove]);
 
   const handleClaim = useCallback(async () => {
     try {
       setPendingClaimTx(true);
       const claimStatus = await onClaim();
-      if (claimStatus == 1) {
+      if (claimStatus === 1) {
         toast.success("Claimed successfully!");
       }
       setPendingClaimTx(false);
@@ -66,7 +66,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
       console.error(e);
       toast.error("Claim failed!");
     }
-  }, [onClaim, account]);
+  }, [onClaim]);
 
   const totalStakedInNum = getBalanceNumber(
     pool.totalSupply,

@@ -1,9 +1,7 @@
 import { useCallback } from "react";
-import { useWeb3React } from "@web3-react/core";
 import { ethers, Contract } from "ethers";
 
 export const useApprove = (tokenContract: Contract, spender: string) => {
-  const { account } = useWeb3React();
   const handleApprove = useCallback(async () => {
     try {
       const tx = await tokenContract.approve(
@@ -16,7 +14,7 @@ export const useApprove = (tokenContract: Contract, spender: string) => {
       console.error(e);
       return false;
     }
-  }, [account, tokenContract, spender]);
+  }, [tokenContract, spender]);
 
   return { onApprove: handleApprove };
 };

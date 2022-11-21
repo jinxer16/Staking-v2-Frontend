@@ -1,7 +1,6 @@
 // Set of helper functions to facilitate wallet setup
 
 import { BASE_EXPLORER_URL } from "config";
-import { toast } from "react-toastify";
 import getRpcUrl from "./getRpcUrl";
 
 declare let window: any;

@@ -1,9 +1,7 @@
-import { useWeb3React } from "@web3-react/core";
 import {
   DEFAULT_CHAIN_ID,
   NATIVE_TOKEN_ADDRESS,
   NATIVE_TOKEN_SYMBOL,
-  ORIO_LOGO_URL,
 } from "config";
 import React from "react";
 import {
@@ -13,7 +11,7 @@ import {
   useTokenPrice,
 } from "state/hooks";
 import { getBalanceNumber } from "utils/formatBalance";
-import { registerToken } from "utils/wallet";
+// import { registerToken } from "utils/wallet";
 import "./header.css";
 
 const Header: React.FC = () => {

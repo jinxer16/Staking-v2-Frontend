@@ -8,7 +8,7 @@ const Navbar = () => {
       <div className="navbar">
         <img src={logo} alt="logo" className="logo"></img>
         <div className="middlePart">
-          <a href="#">
+          <a href="https://staking.fibswap.io">
             <svg
               className="notActive"
               width="54"
@@ -394,7 +394,7 @@ const Navbar = () => {
             </svg>
           </a>
 
-          <a href="#">
+          <a href="https://staking.fibswap.io">
             <svg
               className="notActive"
               width="54"
@@ -469,7 +469,7 @@ const Navbar = () => {
         </svg>
 
         <div className="navBarMenu">
-          <a href="#">
+          <a href="https://staking.fibswap.io">
             <svg
               className="notActive"
               width="54"
@@ -855,7 +855,7 @@ const Navbar = () => {
             </svg>
           </a>
 
-          <a href="#">
+          <a href="https://staking.fibswap.io">
             <svg
               className="notActive"
               width="54"
