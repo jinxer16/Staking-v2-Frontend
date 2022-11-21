@@ -45,7 +45,7 @@ const HomeDiv = styled.div`
 const Landing: React.FC = () => {
   const pools = usePools();
   return (
-    <HomeDiv>
+    <HomeDiv className="mainDiv">
       <div className="topCards row w-100">
         <Header />
         <Header />
