@@ -1,6 +1,12 @@
 import React from "react";
 import { useWeb3React } from "@web3-react/core";
-import { DEFAULT_CHAIN_ID, FIBO_LOGO_URL, FIBO_TOKEN_ADDRESS, FIBO_TOKEN_SYMBOL, NATIVE_TOKEN_SYMBOL} from "config";
+import {
+  DEFAULT_CHAIN_ID,
+  FIBO_LOGO_URL,
+  FIBO_TOKEN_ADDRESS,
+  FIBO_TOKEN_SYMBOL,
+  NATIVE_TOKEN_SYMBOL,
+} from "config";
 import {
   useFIBOTotalValue,
   useTokenMarketInfo,
@@ -11,12 +17,8 @@ import { getBalanceNumber } from "utils/formatBalance";
 import { registerToken } from "utils/wallet";
 
 const Header: React.FC = () => {
-  const { account } = useWeb3React()
-  const nativePrice = useTokenPrice(
-    FIBO_TOKEN_SYMBOL,
-    false,
-    DEFAULT_CHAIN_ID
-  );
+  const { account } = useWeb3React();
+  const nativePrice = useTokenPrice(FIBO_TOKEN_SYMBOL, false, DEFAULT_CHAIN_ID);
   const marketInfo = useTokenMarketInfo(FIBO_TOKEN_ADDRESS);
   const totalLocked = useFIBOTotalValue();
   const totalLockedInUsdFormatted = totalLocked
@@ -25,10 +27,7 @@ const Header: React.FC = () => {
       })}`
     : `-`;
 
-  const totalSupplyInNum = getBalanceNumber(
-    marketInfo.totalSupply,
-    9
-  );
+  const totalSupplyInNum = getBalanceNumber(marketInfo.totalSupply, 18);
   const totalSupplyInUsdFormatted = totalSupplyInNum
     ? `$${(totalSupplyInNum * nativePrice).toLocaleString(undefined, {
         maximumFractionDigits: 0,
@@ -36,8 +35,13 @@ const Header: React.FC = () => {
     : `-`;
 
   const addTokenToMetamask = async () => {
-      await registerToken(FIBO_TOKEN_ADDRESS, FIBO_TOKEN_SYMBOL, 18, FIBO_LOGO_URL)
-  }
+    await registerToken(
+      FIBO_TOKEN_ADDRESS,
+      FIBO_TOKEN_SYMBOL,
+      18,
+      FIBO_LOGO_URL
+    );
+  };
 
   return (
     <Div
@@ -57,38 +61,44 @@ const Header: React.FC = () => {
               <a
                 className="chicon"
                 href="https://polygon.poocoin.app/tokens/0x2b3b16826719bf0b494c8ddebaa5e882093ee37e"
-                target="_blank" rel="noreferrer"
+                target="_blank"
+                rel="noreferrer"
               >
                 <i className="fas fa-chart-line"></i>
               </a>
             </h3>
             <h6>
-              <img src="images/fibo.png" alt="" className="borioicon"/> FIBO Price (FIBO)
+              <img src="images/fibo.png" alt="" className="borioicon" /> FIBO
+              Price (FIBO)
             </h6>
           </div>
           <div className="btnOuter">
             <a
               href="https://quickswap.exchange/#/swap?exactField=input=0x0000000000000000000000000000000000001010&outputCurrency=0x2b3B16826719bF0B494c8ddebaA5E882093eE37e"
               className="border"
-              target="_blank" rel="noreferrer"
+              target="_blank"
+              rel="noreferrer"
             >
               <img src="images/fibo.png" className="borioicon" alt="" />
               Buy FIBO
             </a>
             <a
               href="https://polygonscan.com/address/0x2b3B16826719bF0B494c8ddebaA5E882093eE37e"
-              target="_blank" rel="noreferrer"
+              target="_blank"
+              rel="noreferrer"
             >
               FIBO Smart Contract
             </a>
             <a href="#" className="border">
               <img src="images/MetaMask_Fox.svg" alt="" />
-              <span onClick={() => {
-                    if (account) {
-                        addTokenToMetamask()
-                    }
-                  }}>
-              Add FIBO to Metamask
+              <span
+                onClick={() => {
+                  if (account) {
+                    addTokenToMetamask();
+                  }
+                }}
+              >
+                Add FIBO to Metamask
               </span>
             </a>
           </div>
@@ -117,65 +127,65 @@ const Header: React.FC = () => {
 };
 const Div = styled.div`
   margin-bottom: 30px;
-  .borioicon{
+  .borioicon {
     border: 2px solid #d2d2d2;
   }
-  .bannercontainer{
+  .bannercontainer {
     background: #fff;
-    height:120px;
+    height: 120px;
     border-radius: 14px;
     display: flex;
     justify-content: flex-end;
-    align-items:center;
-    overflow:hidden;
-    margin-top:10px;
-    position:relative;
-    transition:all 0.3s ease;
-    &.bannerhide{
-        height:0 !important
+    align-items: center;
+    overflow: hidden;
+    margin-top: 10px;
+    position: relative;
+    transition: all 0.3s ease;
+    &.bannerhide {
+      height: 0 !important;
     }
-    .fa-times{
-        position:absolute;
-        right:14px;
-        top:14px;
-        color:rgba(255,255,255,0.4);
-        z-index:10;
-        cursor:pointer;
+    .fa-times {
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      color: rgba(255, 255, 255, 0.4);
+      z-index: 10;
+      cursor: pointer;
     }
-    .bannerimg{
-        height:300%;
-        position:absolute;
-        left:0;
-        top:50%;
-        max-width:40%;
-        transform:translateY(-55%);
-        object-fit: contain;
+    .bannerimg {
+      height: 300%;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      max-width: 40%;
+      transform: translateY(-55%);
+      object-fit: contain;
     }
-    .text{
-        padding: 20px;
-        margin-right:3%;
-        font-size:36px;
-        color:#fff;
-        font-family: 'Minako', sans-serif;
-        position:Relative;
-        z-index:10;
-        width:100%;
-        text-align:right;
+    .text {
+      padding: 20px;
+      margin-right: 3%;
+      font-size: 36px;
+      color: #fff;
+      font-family: "Minako", sans-serif;
+      position: Relative;
+      z-index: 10;
+      width: 100%;
+      text-align: right;
     }
     @media screen and (max-width: 991px) {
-        .bannerimg{
-            z-index:0;
-            max-width: 80%;
-            opacity:0.2
-        }
-        .text{
-            text-align:center !important;
-        }
+      .bannerimg {
+        z-index: 0;
+        max-width: 80%;
+        opacity: 0.2;
+      }
+      .text {
+        text-align: center !important;
+      }
     }
     @media screen and (max-width: 500px) {
-        .text{
-            font-size:26px;
-        }
+      .text {
+        font-size: 26px;
+      }
     }
   }
   .headercontainer {
@@ -183,7 +193,7 @@ const Div = styled.div`
     justify-content: space-between;
     align-items: center;
     background: #131723;
-    color:#fff;
+    color: #fff;
     padding: 20px;
     border-radius: 14px;
   }
@@ -201,7 +211,7 @@ const Div = styled.div`
       font-size: 14px;
       color: #23262f;
       border: 2px solid #e00e8b;
-      color:#fff;
+      color: #fff;
       margin-left: 20px;
       min-width: 150px;
       display: flex;
@@ -215,15 +225,14 @@ const Div = styled.div`
         height: 24px;
         width: auto;
         margin-right: 8px;
-        border-radius:50%;
-        
+        border-radius: 50%;
       }
-      
+
       &.border {
         background-color: transparent;
-        border: 2px solid rgb(56,50,65) !important;
-        color:#fff;
-        font-weight:400;
+        border: 2px solid rgb(56, 50, 65) !important;
+        color: #fff;
+        font-weight: 400;
       }
     }
     h3 {
@@ -247,7 +256,7 @@ const Div = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 3px solid  rgb(56,50,65);
+        border: 3px solid rgb(56, 50, 65);
         margin: 0 6px;
         min-width: unset;
         text-decoration: none;
@@ -263,17 +272,17 @@ const Div = styled.div`
       }
       i {
         font-size: 14px;
-        color:  rgb(184,173,210);
+        color: rgb(184, 173, 210);
         cursor: pointer;
       }
     }
     h6 {
-      color: rgb(184,173,210);
+      color: rgb(184, 173, 210);
       margin-bottom: 0;
       img {
         height: 28px;
         margin-right: 6px;
-        border-radius:50%
+        border-radius: 50%;
       }
     }
   }
@@ -283,14 +292,14 @@ const Div = styled.div`
     .info_single {
       padding-right: 20px;
       margin-right: 20px;
-      border-right: 3px solid rgb(56,50,65);
+      border-right: 3px solid rgb(56, 50, 65);
       &:last-child {
         padding-right: 0px;
         margin-right: 0px;
         border-right: 0;
       }
       h6 {
-        color: rgb(184,173,210);
+        color: rgb(184, 173, 210);
       }
     }
   }
