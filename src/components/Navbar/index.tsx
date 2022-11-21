@@ -9,6 +9,7 @@ import { ConnectorNames } from "config/types";
 import { DEFAULT_CHAIN_ID, localStorageKey } from "config";
 import useAuth from "hooks/useAuth";
 import Security from "../Modals/Security";
+import fibLogo from "../../assets/fibswap.svg";
 
 const Navbar: React.FC = () => {
   const [click, setClick] = useState(false);
@@ -48,18 +49,9 @@ const Navbar: React.FC = () => {
         <div className="nav-container">
           <div className="left">
             <Link exact to="/" className="nav-logo">
-              <img src="images/fibswap.png" alt="" />
+              <img src="images/fibswap.svg" alt="" />
               {/* <img src="images/logo-m.png" alt=""  className="logotwo"/> */}
             </Link>
-            <div>
-              <h4>Fibo Token</h4>
-              <h5>
-              0x2b3b...e37e{" "}
-                <a href="https://polygonscan.com/address/0x2b3b16826719bf0b494c8ddebaa5e882093ee37e" target="_blank" rel="noreferrer">
-                  <i class="fa fa-external-link" aria-hidden="true"></i>
-                </a>
-              </h5>
-            </div>
           </div>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
