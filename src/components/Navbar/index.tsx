@@ -1,8 +1,16 @@
 import "./nav.css";
 import logo from "../../assets/fibswaplogo.svg";
 import hamburger from "../../assets/hamburger.svg";
+import { useWeb3React } from "@web3-react/core";
+import useAuth from "hooks/useAuth";
+import { ConnectorNames } from "config/types";
+import { DEFAULT_CHAIN_ID, localStorageKey } from "config";
+import { shorter } from "utils/formatBalance";
 
 const Navbar = () => {
+  const { account } = useWeb3React();
+  const { login } = useAuth();
+ 
   return (
     <div className="">
       <div className="navbar">
@@ -451,6 +459,16 @@ const Navbar = () => {
           <a href="https://quickswap.exchange/#/swap?exactField=input=0x0000000000000000000000000000000000001010&outputCurrency=0x2b3B16826719bF0B494c8ddebaA5E882093eE37e">
             <button className="fibo">Buy Fibo</button>
           </a>
+          {!account ? (
+          <button className="fibo" onClick={() => {
+            login(ConnectorNames.Injected, DEFAULT_CHAIN_ID);
+            window.localStorage.setItem(localStorageKey, "1");
+          }}>
+              Connect Wallet
+          </button >
+          ) : <button className="fibo" disabled>
+              {shorter(account)}
+            </button>}
         </div>
         <img src={hamburger} alt="" className="hamburger"></img>
       </div>

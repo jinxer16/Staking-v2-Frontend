@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../../components/Header";
 import FarmCard from "../../components/Cards/Farm";
 import { usePools } from "state/hooks";
 import "./landing.css";
@@ -44,15 +43,9 @@ const HomeDiv = styled.div`
 `;
 const Landing: React.FC = () => {
   const pools = usePools();
+  console.log({pools})
   return (
     <HomeDiv className="mainDiv">
-      <div className="topCards row w-100">
-        <Header />
-        <Header />
-        <Header />
-      </div>
-
-      {/* <FibHeader/> */}
       <div className="cardsouter">
         <div className="row w-100">
           {pools.map((pool) => {

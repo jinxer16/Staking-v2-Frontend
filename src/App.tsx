@@ -15,7 +15,7 @@ import background from "./assets/bg.webp";
 
 function App() {
   useEagerConnect(DEFAULT_CHAIN_ID);
-  useFetchPublicData();
+  // useFetchPublicData();
   const dispatch = useDispatch();
   const { slowRefresh } = useRefresh();
 

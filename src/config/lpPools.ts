@@ -2,68 +2,52 @@ import { LpPoolConfig } from "./types";
 
 const lpPools: LpPoolConfig[] = [
   {
-    name: "WBNB",
+    name: "WMATIC",
     lpAddress: {
-      56: "0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16", // WBNB-BUSD
+      56: "", 
       97: "",
       42161: "",
+      137: "0x6e7a5fafcec6bb1e78bae2a1f0b612012bf14827", // WMATIC-USDC
     },
-    tokenSymbol: "WBNB",
+    tokenSymbol: "WMATIC",
     tokenAddress: {
-      56: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      56: "",
       97: "",
       42161: "",
+      137: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
     },
     tokenDecimal: 18,
-    quoteTokenSymbol: "BUSD",
+    quoteTokenSymbol: "USDC",
     quoteTokenAddress: {
-      56: "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+      56: "",
       97: "",
       42161: "",
+      137: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
     },
-    quoteTokenDecimal: 18,
-  },
-  {
-    name: "ORIO",
-    lpAddress: {
-      56: "0xAF270888755d2993624Ec3381e93d298F94f7d50",
-      97: "",
-      42161: "",
-    }, // ORIO-BNB
-    tokenSymbol: "ORIO",
-    tokenAddress: {
-      56: "0xa30BAba694b8Fc3524C46edC5af295F55381dc60",
-      97: "",
-      42161: "",
-    },
-    tokenDecimal: 18,
-    quoteTokenSymbol: "WBNB",
-    quoteTokenAddress: {
-      56: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      97: "",
-      42161: "",
-    },
-    quoteTokenDecimal: 18,
+    quoteTokenDecimal: 6,
   },
   {
     name: "FIBO",
     lpAddress: {
-      56: "0x196e7b3301c801256288ec29f4ed93dd4a47a4a5",
+      56: "",
       97: "",
       42161: "",
-    }, // FIBO-BNB
+      137: "0xcd7593f9002dd012a4e06130ced9034ebd96654e" // FIBO-MATIC
+    }, 
     tokenSymbol: "FIBO",
     tokenAddress: {
-      56: "0x5067c6e9E6c443372f2E62946273ABbF3Cc2f2B3",
+      56: "",
       97: "",
       42161: "",
+      137: "0x2b3B16826719bF0B494c8ddebaA5E882093eE37e"
     },
-    tokenDecimal: 9,
-    quoteTokenSymbol: "WBNB",
+    tokenDecimal: 18,
+    quoteTokenSymbol: "WMATIC",
     quoteTokenAddress: {
-      56: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      56: "",
       97: "",
       42161: "",
+      137: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270"
     },
     quoteTokenDecimal: 18,
   },
