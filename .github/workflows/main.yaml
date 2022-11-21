@@ -39,7 +39,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          run: |
+          script: |
             cd /var/www/Staking-v2-Frontend && sudo git pull https://hades8090:${{ secrets.ACCESS_TOKEN }}@github.com/FibswapDEx/Staking-v2-Frontend staging
             yarn && yarn build
             service nginx restart
