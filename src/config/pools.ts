@@ -61,6 +61,36 @@ const pools: PoolConfig[] = [
     logo: "images/farms/fibo.png",
     lockingDuration: 7776000,
   },
+  {
+    name: "FiboDAO (no lock)",
+    isNativePool: false,
+    isLpPool: false,
+    isSpecialPool: false,
+    address: {
+      56: "",
+      97: "",
+      42161: "",
+      137: "0xb839F9d62041f0D5198C2C63e08B460a07ccbd24"
+    },
+    stakeToken: {
+      56: "",
+      97: "",
+      42161: "",
+      137: "0x2117e96D2bb782521341E749C69D9AF593FF02B6"
+    },
+    stakeTokenSymbol: "FIBODAO",
+    stakeTokenDecimal: 18,
+    rewardToken: {
+      56: "",
+      97: "",
+      42161: "",
+      137: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+    },
+    rewardTokenSymbol: "USDC",
+    rewardTokenDecimal: 6,
+    logo: "images/farms/fibo.png",
+    lockingDuration: 7776000,
+  },
 ];
 
 export default pools;

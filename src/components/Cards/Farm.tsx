@@ -201,9 +201,14 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
               <button disabled={pendingClaimTx} onClick={handleClaim}>
                 Collect
               </button>
-              <button onClick={() => {
-                        depositRef.current.openModal()
-                    }} className="plusminus">+ Deposit</button>
+              <button
+                onClick={() => {
+                  depositRef.current.openModal();
+                }}
+                className="plusminus"
+              >
+                + Deposit
+              </button>
               <button
                 onClick={() => {
                   withdrawRef.current.openModal();
@@ -214,6 +219,28 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
                 - Withdraw
               </button>
             </div>
+
+            {pool.stakeTokenSymbol === "FIBODAO" && (
+              <div className="daocontrols">
+                <button
+                  onClick={() => {
+                    depositRef.current.openModal();
+                  }}
+                  className="plusminus"
+                >
+                  + Get DAO
+                </button>
+                <button
+                  onClick={() => {
+                    withdrawRef.current.openModal();
+                  }}
+                  className="plusminus"
+                  disabled={withdrawLocked}
+                >
+                  - Repay DAO
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <div className="approve">
@@ -558,6 +585,19 @@ const CardDiv = styled.div`
           &:first-child {
             border: 3px solid rgb(224, 14, 139);
           }
+          padding: 7px 16px;
+          font-size: 12px;
+          margin: 3px;
+        }
+        @media screen and (max-width: 400px) {
+          display: flex;
+          justify-content: center;
+          flex-flow: wrap;
+        }
+      }
+      .daocontrols {
+        margin-top: 20px;
+        button {
           padding: 7px 16px;
           font-size: 12px;
           margin: 3px;
