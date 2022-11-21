@@ -56,51 +56,58 @@ const Navbar: React.FC = () => {
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <ul className="nav-menu-inner">
-              <li
-                className={isActive("about") ? "nav-item active" : `nav-item`}
-              >
+            <li className="nav-item">
                 <Link
                   exact
-                  to={{ pathname: "https://bsc.fibswap.io/swap?outputCurrency=0x5067c6e9E6c443372f2E62946273ABbF3Cc2f2B3" }} target="_blank"
-                  activeClassName="active"
-                  className={isActive("buy") ? "nav-links active" : `nav-links`}
-                  className="nav-links"
+                  to={{ pathname: "https://staking.fibswap.io"}} target="_blank"
                 >
-                  Buy Fibo
+                  <img src="images/stakinglogo.svg" alt=""/>
                 </Link>
                 <div>
             </div>                
               </li>
-              <li className={isActive("pred") ? "nav-item active" : `nav-item`}>
+              <li className="nav-item">
                 <Link
-                  to={{ pathname: "https://dashboard.fibswap.io/" }} target="_blank"
-                  activeClassName="active"
-                  onClick={() => onlinkclick("dash")}
-                  className={
-                    isActive("dash") ? "nav-links active" : `nav-links`
-                  }
-                  className="nav-links"
+                  to={{ pathname: "https://dex.fibswap.io/" }} target="_blank"
                 >
-                  Dashboard
+                  <img src="images/dexlogo.svg" alt=""/>
                 </Link>
               </li>
-              <li
-                className="nav-item"
-                className={isActive("") ? "nav-item active" : `nav-item`}
-              >
+              <li className="nav-item">
                 <Link
-                  exact
-                  to={{ pathname: "https://www.fibswap.tech/" }} target="_blank"
-                  activeClassName="active"
-                  onClick={() => onlinkclick("tech")}
-                  className={
-                    isActive("tech") ? "nav-links active" : `nav-links`
-                  }
-                  className="nav-links"
+                  to={{ pathname: "https://fibpal.fibswap.io/explore" }} target="_blank"
                 >
-                  Tech Support
+                  <img src="images/fibpal.svg" alt=""/>
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link
+                  to={{ pathname: "https://fibswap.tech" }} target="_blank"
+                >
+                  <img src="images/fibswaptech.svg" alt=""/>
+                </Link>
+              </li>   
+              <li className="nav-item">
+                <Link
+                  to={{ pathname: "https://chart.fibswap.tech" }} target="_blank"
+                >
+                  <img src="images/chart.svg" alt=""/>
+                </Link>
+              </li>      
+              <li className="nav-item">
+                <Link
+                  to={{ pathname: "/" }} target="_blank"
+                >
+                  <img src="images/tech2.svg" alt=""/>
+                </Link>
+              </li> 
+              <li className="nav-item">
+                <Link
+                  to={{ pathname: "/" }} target="_blank"
+                >
+                  <img src="images/setting.svg" alt=""/>
+                </Link>
+              </li>                      
             </ul>
             <li className="nav-item connectbtn">
               {!account ? (
