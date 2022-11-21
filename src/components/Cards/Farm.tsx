@@ -144,7 +144,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
           <div>
             {/* <h5>{pool.name}</h5> */}
             <h6 className="earnCoin">
-              Earn <span>{pool.stakeTokenSymbol}</span>
+              Earn <span>{pool.rewardTokenSymbol}</span>
             </h6>
             {/* <h5>
               {pool.depositFee && pool.depositFee.toString() === "0" ? (
@@ -202,19 +202,9 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
               <button disabled={pendingClaimTx} onClick={handleClaim}>
                 Collect
               </button>
-              {pool.rewardTokenSymbol === "ORIO" && (
-                <button
-                  onClick={() => {
-                    depositRef.current.openModal();
-                  }}
-                  className="plusminus"
-                >
-                  + Deposit
-                </button>
-              )}
-              {/* <button onClick={() => {
+              <button onClick={() => {
                         depositRef.current.openModal()
-                    }} className="plusminus">+ Deposit</button> */}
+                    }} className="plusminus">+ Deposit</button>
               <button
                 onClick={() => {
                   withdrawRef.current.openModal();
