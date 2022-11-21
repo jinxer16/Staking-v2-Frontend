@@ -1,21 +1,20 @@
-import { useCallback } from "react";
-import { useRewardPoolContract } from "./useContracts";
+import { useCallback} from 'react'
+import { useWeb3React } from '@web3-react/core'
+import { useRewardPoolContract } from './useContracts'
 
 export const useUnStake = (poolAddress: string) => {
-  const rewardPoolContract = useRewardPoolContract(poolAddress);
-  const handleUnStake = useCallback(
-    async (amount: string) => {
+    const { account } = useWeb3React()
+    const rewardPoolContract = useRewardPoolContract(poolAddress)
+    const handleUnStake = useCallback(async (amount: string) => {
       try {
-        const tx = await rewardPoolContract.withdraw(amount);
-        const receipt = await tx.wait();
-        return receipt.status;
+        const tx = await rewardPoolContract.withdraw(amount)
+        const receipt = await tx.wait()
+        return receipt.status
       } catch (e) {
-        console.error(e);
-        return false;
+        console.error(e)
+        return false
       }
-    },
-    [rewardPoolContract]
-  );
-
-  return { onUnStake: handleUnStake };
-};
+    }, [account, rewardPoolContract])
+  
+    return { onUnStake: handleUnStake }
+}

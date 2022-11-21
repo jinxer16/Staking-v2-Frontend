@@ -1,9 +1,9 @@
 import { PoolConfig } from "config/types";
 
 export interface PoolState {
-  data: PoolConfig[];
+    data: PoolConfig[]
 }
 
 export interface State {
-  pools: PoolState;
+    pools: PoolState
 }
