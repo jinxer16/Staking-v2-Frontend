@@ -4,9 +4,9 @@ import { DEFAULT_CHAIN_ID, FIBO_TOKEN_ADDRESS } from "config";
 import contracts from "config/contracts";
 import { useApprove } from "hooks/useApprove";
 import { useERC20 } from "hooks/useContracts";
+import { useDeposit } from "hooks/useDeposit";
 import useRefresh from "hooks/useRefresh";
-import { useStake } from "hooks/useStake";
-import { useETHBalance, useTokenBalance } from "hooks/useTokenBalance";
+import { useTokenBalance } from "hooks/useTokenBalance";
 import useWeb3Provider from "hooks/useWeb3Provider";
 import React, { useCallback, useEffect, useState } from "react";
 import Modal from "react-modal";
@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { usePoolFromName } from "state/hooks";
 import { fetchPoolsUserDataAsync } from "state/pools";
 import { getAllowance, getTokenBalance } from "utils/callHelpers";
-import { getBalanceNumber, getDecimalAmount } from "utils/formatBalance";
+import { getDecimalAmount } from "utils/formatBalance";
 
 const customStyles = {
   content: {
@@ -38,7 +38,7 @@ interface DepositModalProps {
 }
 
 const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const [approved, setApproved] = useState(false);
   const [allowance, setAllowance] = useState(0);
   const { fastRefresh } = useRefresh();
@@ -48,12 +48,13 @@ const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
   const provider = useWeb3Provider();
   const poolName = props.name;
   const pool = usePoolFromName(poolName);
-  const { onStake } = useStake(pool.address[DEFAULT_CHAIN_ID]);
+
+  const { onDeposit } = useDeposit(contracts.daoDistributor[DEFAULT_CHAIN_ID]);
   const fiboContract = useERC20(FIBO_TOKEN_ADDRESS);
 
   const { onApprove } = useApprove(
     fiboContract,
-    contracts.daoToken[DEFAULT_CHAIN_ID]
+    contracts.daoDistributor[DEFAULT_CHAIN_ID]
   );
 
   const handleApprove = useCallback(async () => {
@@ -74,10 +75,8 @@ const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
       const _allowance = await getAllowance(
         FIBO_TOKEN_ADDRESS,
         account,
-        contracts.daoToken[DEFAULT_CHAIN_ID]
+        contracts.daoDistributor[DEFAULT_CHAIN_ID]
       );
-      console.log("> allowances:");
-      console.log(_allowance);
       setAllowance(_allowance);
     };
 
@@ -86,46 +85,27 @@ const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
     }
   }, [account]);
 
-  const defaultEthBalance = useETHBalance();
   let defaultTokenBalance =
     Math.floor(useTokenBalance(FIBO_TOKEN_ADDRESS) * 100000) / 100000;
-
-  if (pool.isNativePool) {
-    defaultTokenBalance = Math.floor(defaultEthBalance * 100000) / 100000;
-  }
-
   const defaultTokenBalalnceFormatted = defaultTokenBalance
     ? `${defaultTokenBalance.toLocaleString(undefined, {
         maximumFractionDigits: 5,
       })} FIBO`
     : `0.000000000 FIBO`;
 
-  const [tokenBalance, setTokenBalance] = React.useState(defaultTokenBalance);
-  const [tokenBalanceFormatted, setTokenBalanceFormatted] = React.useState(
+  const [tokenBalance, setTokenBalance] = useState(defaultTokenBalance);
+  const [tokenBalanceFormatted, setTokenBalanceFormatted] = useState(
     defaultTokenBalalnceFormatted
   );
 
   useEffect(() => {
     if (account) {
-      const fetchETHBalance = async (_account, _provider) => {
-        const res = await _provider.getBalance(_account);
-        setTokenBalance(
-          Math.floor(
-            getBalanceNumber(new BigNumber(res.toString()), 18) * 10000
-          ) / 10000
-        );
-      };
-
       const fetchTokenBalance = async (_account, _tokenAddress) => {
         const res = await getTokenBalance(_account, _tokenAddress);
         setTokenBalance(Math.floor(res * 100000) / 100000);
       };
 
-      if (pool.isNativePool) {
-        fetchETHBalance(account, provider);
-      } else {
-        fetchTokenBalance(account, pool.stakeToken[DEFAULT_CHAIN_ID]);
-      }
+      fetchTokenBalance(account, FIBO_TOKEN_ADDRESS);
     }
   }, [fastRefresh, provider, account, pool]);
 
@@ -176,6 +156,7 @@ const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
           />
           <button onClick={() => setTokenAmount(tokenBalance)}>MAX</button>
         </div>
+        <h5>{`~${tokenAmount / 50000} FIBODAO`}</h5>
         {approved || allowance > 0 ? (
           <button
             disabled={pendingTx}
@@ -183,23 +164,16 @@ const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
               if (tokenAmount <= tokenBalance) {
                 const tokenAmountInBigNum = getDecimalAmount(
                   new BigNumber(tokenAmount),
-                  pool.stakeTokenDecimal
+                  18
                 );
                 console.info(tokenAmountInBigNum.toString());
                 try {
                   setPendingTx(true);
-                  let stakeStatus = 0;
-                  if (pool.isNativePool) {
-                    stakeStatus = await onStake(
-                      tokenAmountInBigNum.toString(10),
-                      tokenAmountInBigNum.toString(10)
-                    );
-                  } else {
-                    stakeStatus = await onStake(
-                      tokenAmountInBigNum.toString(10)
-                    );
-                  }
-                  if (stakeStatus === 1) {
+                  let depositStatus = 0;
+                  depositStatus = await onDeposit(
+                    tokenAmountInBigNum.toString(10)
+                  );
+                  if (depositStatus === 1) {
                     toast.success("Deposited successfully!");
                     setTokenAmount(0);
                     closeModal();

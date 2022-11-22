@@ -11,4 +11,7 @@ export default {
   daoToken: {
     [NETWORK.Polygon]: "0x2117e96D2bb782521341E749C69D9AF593FF02B6",
   },
+  daoDistributor: {
+    [NETWORK.Polygon]: "0xc0016f1ACecDFa17376C7606447e519bF82Df447",
+  },
 };
