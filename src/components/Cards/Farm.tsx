@@ -243,7 +243,6 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
                     withdrawDaoRef.current.openModal();
                   }}
                   className="plusminus"
-                  disabled={withdrawLocked}
                 >
                   - Repay DAO
                 </button>
