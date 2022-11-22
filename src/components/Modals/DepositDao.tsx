@@ -1,17 +1,20 @@
 import { useWeb3React } from "@web3-react/core";
 import BigNumber from "bignumber.js";
-import { DEFAULT_CHAIN_ID } from "config";
+import { DEFAULT_CHAIN_ID, FIBO_TOKEN_ADDRESS } from "config";
+import contracts from "config/contracts";
+import { useApprove } from "hooks/useApprove";
+import { useERC20 } from "hooks/useContracts";
 import useRefresh from "hooks/useRefresh";
 import { useStake } from "hooks/useStake";
 import { useETHBalance, useTokenBalance } from "hooks/useTokenBalance";
 import useWeb3Provider from "hooks/useWeb3Provider";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { usePoolFromName } from "state/hooks";
 import { fetchPoolsUserDataAsync } from "state/pools";
-import { getTokenBalance } from "utils/callHelpers";
+import { getAllowance, getTokenBalance } from "utils/callHelpers";
 import { getBalanceNumber, getDecimalAmount } from "utils/formatBalance";
 
 const customStyles = {
@@ -28,7 +31,7 @@ const customStyles = {
   },
 };
 
-const { forwardRef, useRef, useImperativeHandle } = React;
+const { forwardRef, useImperativeHandle } = React;
 
 interface DepositModalProps {
   name: string;
@@ -36,6 +39,8 @@ interface DepositModalProps {
 
 const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [approved, setApproved] = useState(false);
+  const [allowance, setAllowance] = useState(0);
   const { fastRefresh } = useRefresh();
 
   const dispatch = useDispatch();
@@ -44,11 +49,46 @@ const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
   const poolName = props.name;
   const pool = usePoolFromName(poolName);
   const { onStake } = useStake(pool.address[DEFAULT_CHAIN_ID]);
+  const fiboContract = useERC20(FIBO_TOKEN_ADDRESS);
+
+  const { onApprove } = useApprove(
+    fiboContract,
+    contracts.daoToken[DEFAULT_CHAIN_ID]
+  );
+
+  const handleApprove = useCallback(async () => {
+    try {
+      const approveStatus = await onApprove();
+      if (approveStatus === 1) {
+        toast.success("Approved successfully!");
+      }
+      setApproved(true);
+    } catch (e) {
+      console.error(e);
+      toast.error("Approve failed!");
+    }
+  }, [onApprove]);
+
+  useEffect(() => {
+    const fetchAllowance = async () => {
+      const _allowance = await getAllowance(
+        FIBO_TOKEN_ADDRESS,
+        account,
+        contracts.daoToken[DEFAULT_CHAIN_ID]
+      );
+      console.log("> allowances:");
+      console.log(_allowance);
+      setAllowance(_allowance);
+    };
+
+    if (account) {
+      fetchAllowance();
+    }
+  }, [account]);
 
   const defaultEthBalance = useETHBalance();
   let defaultTokenBalance =
-    Math.floor(useTokenBalance(pool.stakeToken[DEFAULT_CHAIN_ID]) * 100000) /
-    100000;
+    Math.floor(useTokenBalance(FIBO_TOKEN_ADDRESS) * 100000) / 100000;
 
   if (pool.isNativePool) {
     defaultTokenBalance = Math.floor(defaultEthBalance * 100000) / 100000;
@@ -57,8 +97,8 @@ const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
   const defaultTokenBalalnceFormatted = defaultTokenBalance
     ? `${defaultTokenBalance.toLocaleString(undefined, {
         maximumFractionDigits: 5,
-      })} ${pool.stakeTokenSymbol}`
-    : `0.000000000 ${pool.stakeTokenSymbol}`;
+      })} FIBO`
+    : `0.000000000 FIBO`;
 
   const [tokenBalance, setTokenBalance] = React.useState(defaultTokenBalance);
   const [tokenBalanceFormatted, setTokenBalanceFormatted] = React.useState(
@@ -93,8 +133,8 @@ const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
     const _tokenBalanceFormatted = tokenBalance
       ? `${tokenBalance.toLocaleString(undefined, {
           maximumFractionDigits: 5,
-        })} ${pool.stakeTokenSymbol}`
-      : `0.000000000 ${pool.stakeTokenSymbol}`;
+        })} FIBO`
+      : `0.000000000 FIBO`;
     setTokenBalanceFormatted(_tokenBalanceFormatted);
   }, [tokenBalance, pool]);
 
@@ -136,48 +176,54 @@ const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
           />
           <button onClick={() => setTokenAmount(tokenBalance)}>MAX</button>
         </div>
-        <button
-          disabled={pendingTx}
-          onClick={async () => {
-            if (tokenAmount <= tokenBalance) {
-              const tokenAmountInBigNum = getDecimalAmount(
-                new BigNumber(tokenAmount),
-                pool.stakeTokenDecimal
-              );
-              console.info(tokenAmountInBigNum.toString());
-              try {
-                setPendingTx(true);
-                let stakeStatus = 0;
-                if (pool.isNativePool) {
-                  stakeStatus = await onStake(
-                    tokenAmountInBigNum.toString(10),
-                    tokenAmountInBigNum.toString(10)
-                  );
-                } else {
-                  stakeStatus = await onStake(tokenAmountInBigNum.toString(10));
-                }
-                if (stakeStatus === 1) {
-                  toast.success("Deposited successfully!");
-                  setTokenAmount(0);
-                  closeModal();
-                  dispatch(fetchPoolsUserDataAsync(account));
-                } else {
+        {approved || allowance > 0 ? (
+          <button
+            disabled={pendingTx}
+            onClick={async () => {
+              if (tokenAmount <= tokenBalance) {
+                const tokenAmountInBigNum = getDecimalAmount(
+                  new BigNumber(tokenAmount),
+                  pool.stakeTokenDecimal
+                );
+                console.info(tokenAmountInBigNum.toString());
+                try {
+                  setPendingTx(true);
+                  let stakeStatus = 0;
+                  if (pool.isNativePool) {
+                    stakeStatus = await onStake(
+                      tokenAmountInBigNum.toString(10),
+                      tokenAmountInBigNum.toString(10)
+                    );
+                  } else {
+                    stakeStatus = await onStake(
+                      tokenAmountInBigNum.toString(10)
+                    );
+                  }
+                  if (stakeStatus === 1) {
+                    toast.success("Deposited successfully!");
+                    setTokenAmount(0);
+                    closeModal();
+                    dispatch(fetchPoolsUserDataAsync(account));
+                  } else {
+                    toast.error("Deposit failed!");
+                  }
+                } catch (e) {
+                  console.error(e);
                   toast.error("Deposit failed!");
                 }
-              } catch (e) {
-                console.error(e);
-                toast.error("Deposit failed!");
-              }
 
-              setPendingTx(false);
-            } else {
-              setTokenAmount(0);
-            }
-          }}
-        >
-          {" "}
-          Deposit
-        </button>
+                setPendingTx(false);
+              } else {
+                setTokenAmount(0);
+              }
+            }}
+          >
+            {" "}
+            Deposit
+          </button>
+        ) : (
+          <button onClick={handleApprove}>Approve</button>
+        )}
       </div>
     </Modal>
   );

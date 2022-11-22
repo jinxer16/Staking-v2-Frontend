@@ -11,6 +11,8 @@ import { toast } from "react-toastify";
 import { useClaim } from "hooks/useClaim";
 import Deposit from "components/Modals/Deposit";
 import Withdraw from "components/Modals/Withdraw";
+import DepositDao from "components/Modals/DepositDao";
+import WithdrawDao from "components/Modals/WithdrawDao";
 
 interface CardValueProps {
   poolName: string;
@@ -40,6 +42,8 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
   const { onClaim } = useClaim(pool.address[DEFAULT_CHAIN_ID]);
   const depositRef = useRef(null);
   const withdrawRef = useRef(null);
+  const depositDaoRef = useRef(null);
+  const withdrawDaoRef = useRef(null);
   const textAreaRef = useRef(null);
   const handleApprove = useCallback(async () => {
     try {
@@ -135,6 +139,10 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
       <Deposit name={pool.name} ref={depositRef} />
       {/* @ts-ignore */}
       <Withdraw name={pool.name} ref={withdrawRef} />
+      {/* @ts-ignore */}
+      <DepositDao name={pool.name} ref={depositDaoRef} />
+      {/* @ts-ignore */}
+      <WithdrawDao name={pool.name} ref={withdrawDaoRef} />
       <header>
         <div className="headerinfo">
           <img
@@ -224,7 +232,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
               <div className="daocontrols">
                 <button
                   onClick={() => {
-                    depositRef.current.openModal();
+                    depositDaoRef.current.openModal();
                   }}
                   className="plusminus"
                 >
@@ -232,7 +240,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
                 </button>
                 <button
                   onClick={() => {
-                    withdrawRef.current.openModal();
+                    withdrawDaoRef.current.openModal();
                   }}
                   className="plusminus"
                   disabled={withdrawLocked}

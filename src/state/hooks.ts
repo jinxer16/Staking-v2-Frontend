@@ -57,8 +57,9 @@ export const useTokenPrice = (
   chainId: number
 ) => {
   const priceFactor = name === "FIBODAO" ? 50000 : 1;
+  const referalName = name === "FIBODAO" ? "FIBO" : name;
   const ethPrice = useETHPrice(chainId);
-  const lpPool = lpPools.find((f) => f.name === name);
+  const lpPool = lpPools.find((f) => f.name === referalName);
   const [price, setPrice] = useState(0);
   useEffect(() => {
     const fetchPrice = async (lpPool, isLpToken, chainId) => {
@@ -73,11 +74,11 @@ export const useTokenPrice = (
       }
     };
     fetchPrice(lpPool, isLpToken, chainId);
-  }, [name, isLpToken, chainId, lpPool]);
+  }, [referalName, isLpToken, chainId, lpPool]);
   if (lpPool?.quoteTokenSymbol === QuoteToken.USDC) {
-    return price;
+    return price * priceFactor;
   } else if (lpPool?.quoteTokenSymbol === QuoteToken.WMATIC) {
-    return price * ethPrice;
+    return price * ethPrice * priceFactor;
   } else {
     return 1;
   }
