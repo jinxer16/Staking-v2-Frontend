@@ -6,6 +6,8 @@ import Twitter from './components/Modals/Twitter'
 import Landing from './views/Landing'
 import Roadmap from './views/Roadmap'
 import Tokenomics from './views/Tokenomics'
+import background from "./assets/bg.webp";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -38,6 +40,10 @@ function App() {
       <Router>
         <Navbar/>
         {/* <Twitter/> */}
+        
+        <div className="background">
+          <img src={background} alt="" />
+        </div>
        
         <div className="middlesec">
           <Switch>
