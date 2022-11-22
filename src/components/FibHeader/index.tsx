@@ -165,7 +165,7 @@ const Div = styled.div`
       padding: 20px;
       margin-right: 3%;
       font-size: 36px;
-      color: #fff;
+      color: #000;
       font-family: "Minako", sans-serif;
       position: Relative;
       z-index: 10;
@@ -192,8 +192,8 @@ const Div = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #131723;
-    color: #fff;
+    background: #fff;
+    color: #0e0e0e;
     padding: 20px;
     border-radius: 14px;
   }
@@ -210,12 +210,11 @@ const Div = styled.div`
       background-color: #e00e8b;
       font-size: 14px;
       color: #23262f;
-      border: 2px solid #e00e8b;
       color: #fff;
       margin-left: 20px;
       min-width: 150px;
       display: flex;
-      font-weight: 600;
+      font-weight: 400 !important;
       justify-content: center;
       align-items: center;
       text-decoration: none;
@@ -230,13 +229,13 @@ const Div = styled.div`
 
       &.border {
         background-color: transparent;
-        border: 2px solid rgb(56, 50, 65) !important;
-        color: #fff;
+        border: 2px solid #000 !important;
+        color: #000;
         font-weight: 400;
       }
     }
     h3 {
-      color: #fff;
+      color: #000;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -245,7 +244,7 @@ const Div = styled.div`
         padding: 8px 12px;
         background: #15c783;
         font-size: 12px;
-        color: #fff;
+        color: #000;
         margin-left: 12px;
       }
 
@@ -256,7 +255,7 @@ const Div = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 3px solid rgb(56, 50, 65);
+        border: 2px solid rgb(56, 50, 65);
         margin: 0 6px;
         min-width: unset;
         text-decoration: none;
@@ -264,20 +263,20 @@ const Div = styled.div`
         background: transparent;
         cursor: pointer;
         &:hover {
-          border: 2px solid #fff;
+          border: 2px solid #000;
           i {
-            color: #fff;
+            color: #000;
           }
         }
       }
       i {
         font-size: 14px;
-        color: rgb(184, 173, 210);
+        color: #000;
         cursor: pointer;
       }
     }
     h6 {
-      color: rgb(184, 173, 210);
+      color: #000;
       margin-bottom: 0;
       img {
         height: 28px;
@@ -299,7 +298,7 @@ const Div = styled.div`
         border-right: 0;
       }
       h6 {
-        color: rgb(184, 173, 210);
+        color: #000;
       }
     }
   }

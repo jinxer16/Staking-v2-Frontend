@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import FibHeader from '../../components/FibHeader'
 import FarmCard from '../../components/Cards/Farm'
 import { usePools } from 'state/hooks'
+// import 'landing.css';
+
 const HomeDiv = styled.div`
 .col-lg-4{
   padding:0 4px;

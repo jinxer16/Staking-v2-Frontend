@@ -17,7 +17,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #000;
   text-align:left;
-  background: rgba(0, 0, 0, 0) linear-gradient(135deg, rgb(23, 138, 245), rgb(84, 0, 140)) repeat scroll 0% 0%;
+  background: #010101;
   overflow-x: hidden !important;
   min-height: 100vh;
 }
@@ -81,7 +81,7 @@ button{
 }
 
 .ReactModal__Overlay {
-  background:rgba(241,173,43,0.4) !important;
+  background:rgba(0,0,0,0.8) !important;
   z-index: 99;
   .claimmodelouter{
     position: relative;
@@ -303,5 +303,25 @@ button{
     margin-top: 20px;
     height: 20px;
     opacity: 0.25;
+  }
+}
+
+.background{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  
+  img{
+      height: 1000%;
+      width: 150%;
+      opacity: .5;
   }
 }

@@ -139,7 +139,6 @@ const Navbar: React.FC = () => {
 };
 
 const Nav = styled.nav`
-  background: #030823;
   color: #fff;
   .navbar {
     height: 80px;
@@ -168,6 +167,7 @@ const Nav = styled.nav`
       align-items: center;
       img {
         margin-right: 18px;
+        width: 8rem;
       }
       h4 {
         font-size: 18px;
@@ -183,6 +183,7 @@ const Nav = styled.nav`
         margin-left: 8px;
         cursor: pointer;
         color: #fff;
+        width: 2rem;
       }
       @media screen and (max-width: 576px) {
         h4 {
@@ -264,6 +265,7 @@ const Nav = styled.nav`
   .nav-menu-inner {
     display: flex;
     list-style: none;
+    gap: .5rem;
     text-align: center;
     margin-bottom: 0;
     height: 100%;
@@ -272,6 +274,9 @@ const Nav = styled.nav`
     position: absolute;
     right: 50%;
     transform: translateX(50%);
+    img{
+      width: 2.5rem;
+    }
   }
 
   .nav-links {
@@ -394,6 +399,7 @@ const Nav = styled.nav`
       color: #fff;
       max-height: 45x;
       padding: 0 20px;
+      font-weight: 400;
     }
     &:after {
       display: none !important;

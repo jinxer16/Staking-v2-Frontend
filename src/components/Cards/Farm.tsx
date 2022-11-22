@@ -153,7 +153,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
           <div>
             <h5>{pool.name}</h5>
             <h6>Earn {pool.stakeTokenSymbol}</h6>
-            <h5>
+            <h5 className="fee">
               {pool.depositFee && pool.depositFee.toString() === "0" ? (
                 <span>No Fees</span>
               ) : null}
@@ -164,7 +164,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
           <div>
             APY <b>{rewardRateInNum > 0 ? aprInNumFormatted : "NaN"} %</b>
           </div>
-          <div>
+          <div className="totalStaked">
             Total Staked{" "}
             <b>
               {totalStaked} {pool.stakeTokenSymbol}
@@ -174,7 +174,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
             <div
               style={
                 pool.depositFee.toString() === "0"
-                  ? { opacity: 0.5 }
+                  ? { opacity: 1 }
                   : { opacity: 1 }
               }
             >
@@ -268,6 +268,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
               type="text"
               value={pool.address[DEFAULT_CHAIN_ID]}
               readOnly
+              className="address"
             />
           </a>
           <i
@@ -282,9 +283,21 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
   );
 };
 const CardDiv = styled.div`
+  .totalStaked{
+    text-align: left;
+
+    b{
+      text-align: right;
+    }
+  }
+
+  .fee{
+    margin-bottom: 1rem !important;
+  }
+
   // width:40%;
-  background: #131723;
-  color: #fff;
+  background: #fff;
+  color: #141414;
   border-radius: 14px;
   overflow: hidden;
   &.farmpoolcard {
@@ -296,28 +309,31 @@ const CardDiv = styled.div`
   &.specialpool {
     border: 2px solid #cbcaf9;
     .plusminus {
-      color: #23262f !important;
+      color: #141414 !important;
     }
     .headerinfo {
       h5 {
         span {
           background-color: #6b67ef !important;
-          color: #fff;
+          color: #141414;
         }
       }
     }
     .content {
       button {
-        background-color: #6b67ef;
         border: 2px solid #6b67ef;
-        color: #fff;
+        color: #141414;
       }
     }
     .copybutton {
       input,
       i {
-        color: #6b67ef;
+        color: #141414;
+        font-weight: 300;
       }
+
+
+
     }
   }
   header {
@@ -325,7 +341,7 @@ const CardDiv = styled.div`
     justify-content: space-between;
     // align-items:center;
     padding: 18px 16px;
-    color: #fff;
+    color: #141414;
     position: relative;
     border-bottom: 2px solid rgb(56, 50, 65);
     // align-items: center;
@@ -363,7 +379,7 @@ const CardDiv = styled.div`
         }
       }
       h5 {
-        color: #fff;
+        color: #141414;
         font-size: 16px;
         font-weight: 600;
         margin: 0;
@@ -372,15 +388,15 @@ const CardDiv = styled.div`
         display: flex;
         span {
           border-radius: 8px;
-          background-color: #f1ad2b;
-          font-size: 10px;
+          background-color: #D9D9D9;
+          font-size: 12px;
           // font-weight:bold;
-          padding: 4px 8px;
+          padding: 8px 16px;
           margin-top: 3px;
         }
       }
       h6 {
-        color: rgb(184, 173, 210);
+        color: #141414;
         font-size: 14px;
         font-weight: 600;
         margin: 0;
@@ -404,7 +420,7 @@ const CardDiv = styled.div`
         font-size: 14px;
       }
       b {
-        color: rgb(184, 173, 210);
+        color: #141414;
         margin-left: 14px;
         font-weight: 700;
       }
@@ -433,6 +449,10 @@ const CardDiv = styled.div`
     }
   }
 
+  .address{
+    font-weight: 400 !important;
+  }
+
   footer {
     display: flex;
     justify-content: center;
@@ -443,7 +463,7 @@ const CardDiv = styled.div`
     position: relative;
     border-top: 2px solid rgb(56, 50, 65);
     text-align: center;
-    font-weight: 600;
+    font-weight: 200;
     font-size: 16px;
     position: relative;
     .pairbuttonouter {
@@ -454,7 +474,7 @@ const CardDiv = styled.div`
       a {
         overflow: hidden;
         display: block;
-        color: #fff;
+        color: #141414;
         font-size: 14px;
         min-width: unset;
         padding: 7px 10px;
@@ -536,7 +556,14 @@ const CardDiv = styled.div`
         margin: auto;
         display: block;
         padding: 8px 40px;
-        color: #fff;
+        color: #000;
+        font-weight: 500;
+        background: #D9D9D9;
+        cursor: pointer;
+
+        &:hover{
+          background: #B1B1B1;
+        }
       }
     }
     .contentfetched {
@@ -563,7 +590,7 @@ const CardDiv = styled.div`
             border-right: 0;
           }
           b {
-            color: #fff;
+            color: #141414;
             font-size: 17px;
             font-weight: 500;
           }
@@ -589,8 +616,10 @@ const CardDiv = styled.div`
       .controls {
         margin-top: 20px;
         button {
+          color: #000;
           &:first-child {
             border: 3px solid rgb(224, 14, 139);
+            color: #fff;
           }
           padding: 7px 16px;
           font-size: 12px;
@@ -608,6 +637,7 @@ const CardDiv = styled.div`
           padding: 7px 16px;
           font-size: 12px;
           margin: 3px;
+          color: #000;
         }
         @media screen and (max-width: 400px) {
           display: flex;
