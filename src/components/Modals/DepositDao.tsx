@@ -156,7 +156,7 @@ const DepositDao: React.FC<DepositModalProps> = forwardRef((props, ref) => {
           />
           <button onClick={() => setTokenAmount(tokenBalance)}>MAX</button>
         </div>
-        <h5>{`~${tokenAmount / 50000} FIBODAO`}</h5>
+        <h5>{`${tokenAmount / 50000} FIBODAO`}</h5>
         {approved || allowance > 0 ? (
           <button
             disabled={pendingTx}
