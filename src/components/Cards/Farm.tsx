@@ -133,6 +133,8 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
       lastDeposited + pool.lockingDuration > curTimeStamp
     : false;
 
+  console.log(pool)
+
   return (
     <CardDiv className="mycard farmpoolcard">
       {/* @ts-ignore */}
@@ -144,23 +146,24 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
       {/* @ts-ignore */}
       <WithdrawDao name={pool.name} ref={withdrawDaoRef} />
       <header>
-        <div className="headerinfo">
-          <img
-            src={pool.logo}
-            className={isLpPool === false ? "isnotpool" : `ispool`}
-            alt=""
-          />
+        <div className="headertop">
+          <div className="headerinfo">
+            <img
+              src={pool.logo}
+              className={isLpPool === false ? "isnotpool" : `ispool`}
+              alt=""
+            />
+            <div>
+              <h5>{pool.name}</h5>
+            </div>
+          </div>
+
           <div>
-            <h5>{pool.name}</h5>
             <h6>Earn {pool.stakeTokenSymbol}</h6>
-            <h5 className="fee">
-              {pool.depositFee && pool.depositFee.toString() === "0" ? (
-                <span>No Fees</span>
-              ) : null}
-            </h5>
           </div>
         </div>
-        <div className="right">
+
+        <div className="stakinginfo">
           <div>
             APY <b>{rewardRateInNum > 0 ? aprInNumFormatted : "NaN"} %</b>
           </div>
@@ -188,6 +191,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
           ) : null}
         </div>
       </header>
+
       <div className="content">
         {isApproved ? (
           <div className="contentfetched">
@@ -226,9 +230,8 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
               >
                 - Withdraw
               </button>
-            </div>
 
-            {pool.stakeTokenSymbol === "FIBODAO" && (
+              {pool.stakeTokenSymbol === "FIBODAO" && (
               <div className="daocontrols">
                 <button
                   onClick={() => {
@@ -248,6 +251,7 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
                 </button>
               </div>
             )}
+            </div>
           </div>
         ) : (
           <div className="approve">
@@ -283,11 +287,35 @@ const FarmCard: React.FC<CardValueProps> = ({ poolName, isLpPool }) => {
   );
 };
 const CardDiv = styled.div`
+
+    .contentfetched{
+      width: 100%;
+      height: 100%;
+      /* background: lightblue; */
+
+      .infos{
+        b{
+          font-size: 25px !important;
+        }
+      }
+
+      .controls{
+        .daocontrols{
+          display: flex;
+          justify-content: center;
+          .plusminus{
+            border: 2px #d2d1d2 solid !important;
+            color: black !important;
+          }
+        }
+      }
+    }
+
   .totalStaked{
     text-align: left;
 
     b{
-      text-align: right;
+      /* text-align: right; */
     }
   }
 
@@ -298,8 +326,10 @@ const CardDiv = styled.div`
   // width:40%;
   background: #fff;
   color: #141414;
-  border-radius: 14px;
+  border-radius: 30px;
+  padding: 0.5rem 1rem;
   overflow: hidden;
+
   &.farmpoolcard {
     height: 100%;
     display: flex;
@@ -337,8 +367,6 @@ const CardDiv = styled.div`
     }
   }
   header {
-    display: flex;
-    justify-content: space-between;
     // align-items:center;
     padding: 18px 16px;
     color: #141414;
@@ -346,15 +374,22 @@ const CardDiv = styled.div`
     border-bottom: 2px solid rgb(56, 50, 65);
     // align-items: center;
     min-height: 122px;
+
+    .headertop{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .headerinfo {
       display: flex;
-      // align-items:center;
+      align-items:center;
       img {
         &.isnotpool {
           width: 44px;
           height: 44px;
           border-radius: 50%;
-          border: 3px solid #d2d2d2;
+          /* border: 3px solid #d2d2d2; */
           margin-right: 10px;
         }
         &.ispool {
@@ -380,7 +415,7 @@ const CardDiv = styled.div`
       }
       h5 {
         color: #141414;
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 600;
         margin: 0;
         margin-top: 4px;
@@ -398,7 +433,7 @@ const CardDiv = styled.div`
       h6 {
         color: #141414;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 400;
         margin: 0;
       }
       a {
@@ -409,20 +444,24 @@ const CardDiv = styled.div`
         display: block;
       }
     }
-    .right {
-      text-align: right;
+
+    .stakinginfo {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0 5px 0;
       // height:160px;
       div {
-        display: flex;
-        justify-content: space-between;
-        font-weight: 600;
+        font-weight: 400;
         margin: 3px 0;
         font-size: 14px;
+        text-align: center;
+        width: 33%;
       }
       b {
         color: #141414;
-        margin-left: 14px;
-        font-weight: 700;
+        font-weight: 600;
+        display: block;
+        font-size: 25px;
       }
     }
     @media screen and (max-width: 1250px) {
